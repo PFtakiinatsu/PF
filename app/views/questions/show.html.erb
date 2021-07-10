@@ -1,0 +1,30 @@
+<h2>タイトル</h2>
+<p><%= @question.title %></p>
+<h2>質問内容</h2>
+<p><%= @question.body %></p>
+<%= attachment_image_tag @question, :image, :fill, 300, 300, format:"jpeg" %>
+<% if @question.user == current_user %>
+<%= link_to "編集", edit_question_path(@question.id) %>
+<%= link_to "削除", destroy_questions_path(@question.id), method: :delete, "data-confirm" =>"本当に削除しますか？" %>
+<% end %>
+
+<div class="comments">
+  <p>コメント件数: <%= @question.comments.count %></p>
+  <% @question.comments.each do |comment| %>
+    <p><%= image_tag("no_image.jpg") %></p>
+    <%= comment.user.name %>
+    <%= comment.body %>
+    <% if comment.user == current_user %>
+    <div class="comment-delete">
+      <%= link_to "削除", question_comment_path(comment.question, @question), method: :delete %>
+    </div>
+    <% end %>
+  <% end %>
+</div>
+
+<div class="new-comment">
+  <%= form_with(model:[@question, @comment], local: true) do |f| %>
+    <%= f.text_area :body, rows:"5",placeholder: "回答を入力する" %>
+    <%= f.submit "送信する" %>
+  <% end %>
+</div>

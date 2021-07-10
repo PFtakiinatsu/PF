@@ -1,0 +1,14 @@
+<h1>マイページ</h1>
+<p>ユーザー名</p>
+<%= @user.name %>
+<p>目標<p>
+<%= @user.goal %>
+<p>自己紹介</p>
+<%= @user.introduction %>
+<p>質問履歴</p>
+<p>回答履歴</p>
+<p>保存した質問</p>
+
+<% if @user.id == current_user.id %>
+  <p><%= link_to "プロフィール編集", edit_user_path(@user) %></p>
+<% end %>
