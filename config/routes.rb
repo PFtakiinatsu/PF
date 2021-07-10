@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  get "questions/new"
+  get "/about" => "homes#about"
   root to: "homes#top"
   resources :questions, only: [:new, :create, :index, :show, :destroy, :edit, :update] do
     resources :comments, only: [:create, :destroy]

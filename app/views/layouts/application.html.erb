@@ -10,6 +10,45 @@
   </head>
 
   <body>
+<nav class="navbar navbar-expand navbar-dark bg-dark navbar-fixed-top", style="background-color: #432c28;">
+  <div class="container">
+    <div class="row">
+      <%= link_to "TeachMe", root_path, class: "navbar-brand" %>
+      <% if user_signed_in? %>
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <%= link_to "マイページ", about_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "質問をする", new_user_registration_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link" %>
+          </li>
+        </ul>
+      <% else %>
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <%= link_to "TeachMeとは？", about_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "新規登録", new_user_registration_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "ログイン", new_user_session_path, class: "nav-link" %>
+          </li>
+        </ul>
+      <% end %>
+
+      <div class="search-form">
+        <%= form_tag(questions_path, :method => "get") do %>
+          <%= text_field_tag :keyword %>
+          <%= submit_tag "検索" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</nav>
     <%= yield %>
   </body>
 </html>
