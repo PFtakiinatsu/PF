@@ -1,1 +1,22 @@
 <h1>TOPページ</h1>
+<div>
+  <p>新着質問</p>
+    <table>
+      <tr>
+        <th>科目</th>
+        <th>タイトル</th>
+        <th>内容</th>
+        <th>理解度</th>
+        <th>コメント数</th>
+      </tr>
+      <% @questions.each do |question| %>
+      <tr>
+        <td><%= question.subject %></td>
+        <td><%= link_to question.title, question_path(question.id) %></td>
+        <td><%= link_to question.body.truncate(30), question_path(question.id) %></td>
+        <td><%= question.status %></td>
+        <td><%= question.comments.count %></td>
+      </tr>
+      <% end %>
+    </table>
+</div>

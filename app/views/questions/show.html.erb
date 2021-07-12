@@ -5,7 +5,7 @@
 <%= attachment_image_tag @question, :image, :fill, 300, 300, format:"jpeg" %>
 <% if @question.user == current_user %>
 <%= link_to "編集", edit_question_path(@question.id) %>
-<%= link_to "削除", destroy_questions_path(@question.id), method: :delete, "data-confirm" =>"本当に削除しますか？" %>
+<%= link_to "削除", question_path(@question.id), method: :delete, "data-confirm" =>"本当に削除しますか？" %>
 <% end %>
 
 <div class="comments">

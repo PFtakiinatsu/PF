@@ -1,10 +1,14 @@
 class QuestionsController < ApplicationController
+  #ログイン済みユーザーにのみアクセスを許可
+  before_action :authenticate_user!
+
   def new
     @question = Question.new
   end
 
   def create
     question = Question.new(question_params)
+    question.user_id = current_user.id
     question.save
     redirect_to question_path(question.id)
   end
@@ -35,6 +39,6 @@ class QuestionsController < ApplicationController
   end
 
   def question_params
-    params.require(:question).permit(:title, :body, :image)
+    params.require(:question).permit(:title, :body, :image, :user_id, :status, :subject, :point)
   end
 end
