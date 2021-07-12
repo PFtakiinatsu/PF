@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_11_125829) do
+ActiveRecord::Schema.define(version: 2021_07_12_072735) do
 
   create_table "bookmarks", force: :cascade do |t|
     t.integer "user_id"
@@ -38,6 +38,8 @@ ActiveRecord::Schema.define(version: 2021_07_11_125829) do
     t.integer "point"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "best_answer_id"
+    t.boolean "is_solved", default: false, null: false
   end
 
   create_table "users", force: :cascade do |t|
