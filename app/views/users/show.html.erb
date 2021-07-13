@@ -1,0 +1,18 @@
+<h1>マイページ</h1>
+<p>ユーザー名</p>
+<%= @user.name %>
+<%= attachment_image_tag @user, :profile_image, size:"50x50" %>
+<p>目標<p>
+<%= @user.goal %>
+<p>自己紹介</p>
+<%= @user.introduction %>
+  <div>
+    <%= link_to "質問履歴", edit_user_path(@user) %>
+    <%= link_to "解答履歴", edit_user_path(@user) %>
+    <%= link_to "保存した質問", edit_user_path(@user) %>
+  </div>
+
+
+<% if @user.id == current_user.id %>
+  <p><%= link_to "プロフィール編集", edit_user_path(@user) %></p>
+<% end %>
