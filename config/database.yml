@@ -30,3 +30,5 @@ production:
   host: <%= ENV['rds-mysql-server.c3uceufaa99m.ap-northeast-1.rds.amazonaws.com'] %>
   username: <%= ENV['root'] %>
   password: <%= ENV['natsu72T!'] %>
+
+socket: /var/lib/mysql/mysql.sock
