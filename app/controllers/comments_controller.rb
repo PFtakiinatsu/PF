@@ -4,7 +4,7 @@ class CommentsController < ApplicationController
     comment = current_user.comments.new(comment_params)
     comment.question_id = question.id
     comment.save
-    redirect_to question_path(question)
+    redirect_to question_path(params[:question_id])
   end
 
   def destroy

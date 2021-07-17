@@ -41,9 +41,9 @@
       <% end %>
 
       <div class="search-form">
-        <%= form_tag(questions_path, :method => "get") do %>
-          <%= text_field_tag :keyword %>
-          <%= submit_tag "検索" %>
+        <%= form_tag(search_questions_path, :method => "get") do %>
+          <%= text_field_tag :search %>
+          <%= submit_tag "質問を検索" %>
         <% end %>
       </div>
     </div>
