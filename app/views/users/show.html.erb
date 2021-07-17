@@ -16,3 +16,29 @@
 <% if @user.id == current_user.id %>
   <p><%= link_to "プロフィール編集", edit_user_path(@user) %></p>
 <% end %>
+
+<% if @bookmarks.present? %>
+<div>
+  <p>保存した質問</p>
+    <table>
+      <tr>
+        <th>科目</th>
+        <th>タイトル</th>
+        <th>内容</th>
+        <th>理解度</th>
+        <th>コメント数</th>
+        <th>ステータス</th>
+      </tr>
+      <% @bookmarks.each do |bookmark| %>
+      <tr>
+        <td><%= bookmark.subject %></td>
+        <td><%= link_to bookmark.title, question_path(question.id) %></td>
+        <td><%= link_to bookmark.body.truncate(30), question_path(question.id) %></td>
+        <td><%= bookmark.status %></td>
+        <td><%= bookmark.comments.count %></td>
+        <td><%= bookmark.is_solved ? "解決済み":"回答受付中" %></td>
+      </tr>
+      <% end %>
+    </table>
+</div>
+<% end %>
