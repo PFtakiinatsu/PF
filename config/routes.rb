@@ -9,7 +9,8 @@ Rails.application.routes.draw do
       get "search"
     end
     resources :comments, only: [:create, :destroy]
-    resources :bookmarks, only: [:create, :destroy]
+    #resourceで単数形にすると/:idなしになる=>createとdestroyが同じrootパスになる
+    resource :bookmarks, only: [:create, :destroy]
   end
   resources :users, only: [:show, :edit, :update]
 
