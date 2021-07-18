@@ -1,19 +1,10 @@
 <h2>タイトル</h2>
 <p><%= @question.title %> ステータス: <%= @question.is_solved ? "解決済み":"回答受付中" %></p>
+<p><%= @question.user.name %></p>
 
-<% if @question.bookmarked_by?(current_user) %>
-    <p>
-      <%= link_to question_bookmark_path(@question), method: :delete do %>
-        ♥<%= @question.bookmarks.count %> いいね
-      <% end %>
-    </p>
-    <% else %>
-    <p>
-      <%= link_to question_bookmarks_path(@question), method: :post do %>
-        ♡<%= @question.bookmarks.count %> いいね
-      <% end %>
-    </p>
-<% end %>
+<div id="bookmark_<%= @question.id %>">
+  <%= render "bookmarks/bookmark", question: @question %>
+</div>
 
 <h2>質問内容</h2>
 <p><%= @question.body %></p>

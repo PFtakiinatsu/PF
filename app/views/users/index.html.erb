@@ -1,0 +1,6 @@
+<h1>投稿した質問</h1>
+  <P>タイトル</P>
+  <% @questions.each do |question| %>
+  <span><%= link_to question.title, question_path(question.id) %></span>
+  <span><%= question.comments.count %></span>
+<% end %>
