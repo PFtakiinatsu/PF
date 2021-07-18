@@ -1,5 +1,6 @@
 <h2>タイトル</h2>
 <p><%= @question.title %> ステータス: <%= @question.is_solved ? "解決済み":"回答受付中" %></p>
+<p><%= @question.user.name %></p>
 
 <div id="bookmark_<%= @question.id %>">
   <%= render "bookmarks/bookmark", question: @question %>
