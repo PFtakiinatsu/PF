@@ -14,7 +14,9 @@ class QuestionsController < ApplicationController
   end
 
   def index
-    @questions = Question.all
+    #gem "kaminari"を使用　ペジネーションをつけたいデータに.page(params[:page])を追加
+    #perで表示件数を変える（デフォルトは25件）
+    @questions = Question.all.page(params[:page]).per(5)
   end
 
   def show
