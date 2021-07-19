@@ -1,6 +1,11 @@
 class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
+    @questions = Question.where(user_id: @user.id)
+    bookmarks = Bookmark.where(user_id: current_user.id).pluck(:question_id)
+    @bookmark_list = Question.find(bookmarks)
+    comments = Comment.where(user_id: current_user.id).pluck(:question_id)
+    @answered_question = Question.find(comments)
   end
 
   def edit
