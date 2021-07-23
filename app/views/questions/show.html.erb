@@ -55,6 +55,7 @@
    <% if @question.user == current_user and @question.best_answer_id == nil %>
       <%= form_with model: @question, local:true, data: {confirm: "#{comment.user.name}さんの回答をベストアンサーにします。この修正は変更できませんが、よろしいですか？"} do |f| %>
         <%= f.hidden_field :best_answer_id, value: comment.id %>
+        <%= f.hidden_field :point, value: comment.user.point + @question.point %>
         <div class="actions">
           <%= f.submit "ベストアンサーに選ぶ" %>
         </div>

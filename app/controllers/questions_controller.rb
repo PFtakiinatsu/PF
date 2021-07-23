@@ -10,6 +10,10 @@ class QuestionsController < ApplicationController
     question = Question.new(question_params)
     question.user_id = current_user.id
     question.save
+    user = question.user
+    user_point = current_user.point
+    point_sum = user_point - question.point
+    user.update(point: point_sum)
     redirect_to question_path(question.id)
   end
 
@@ -37,10 +41,16 @@ class QuestionsController < ApplicationController
   def update
     question = Question.find(params[:id])
     question.update(question_params)
-    redirect_to question_path(question.id)
     if question.best_answer_id
+      #best_answer_idにquestionのbest_answer_idを代入
+      best_answer_id = params[:question][:best_answer_id]
+      #best_answer_user_idはベストアンサーに選ばれたユーザーのID
+      best_answer_user_id = Comment.find_by(id: best_answer_id).user_id
+      #ベストアンサーに選ばれたユーザーのポイントを更新
+      User.where(id: best_answer_user_id).update(point: question.point)
       question.update(is_solved: true)
     end
+    redirect_to question_path(question.id)
   end
 
   def search
