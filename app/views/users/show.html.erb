@@ -6,6 +6,8 @@
 <%= @user.goal %>
 <p>自己紹介</p>
 <%= @user.introduction %>
+<p>ポイント</p>
+<p><%= @user.point %>ポイント</p>
   <div>
     <%= link_to "質問履歴", edit_user_path(@user) %>
     <%= link_to "解答履歴", edit_user_path(@user) %>

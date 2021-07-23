@@ -23,3 +23,21 @@
     </table>
     <p><%= link_to "もっと見る", questions_path %></p>
 </div>
+
+<div>
+  <p>ランキング</p>
+    <table>
+      <tr>
+        <th></th>
+        <th>ユーザー</th>
+        <th>ポイント数</th>
+      </tr>
+      <% @users.each do |user| %>
+      <tr>
+        <td><%= attachment_image_tag user, :profile_image, size:"50x50" %></td>
+        <td><%= user.name %></td>
+        <td><%= user.point %></td>
+      </tr>
+      <% end %>
+    </table>
+</div>
