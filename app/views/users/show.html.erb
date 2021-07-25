@@ -1,91 +1,111 @@
-<h1>マイページ</h1>
-<p>ユーザー名</p>
-<%= @user.name %>
-<%= attachment_image_tag @user, :profile_image, size:"50x50" %>
-<p>目標<p>
-<%= @user.goal %>
-<p>自己紹介</p>
-<%= @user.introduction %>
-<p>ポイント</p>
-<p><%= @user.point %>ポイント</p>
-  <div>
-    <%= link_to "保存した質問", edit_user_path(@user) %>
+<main>
+  <p id="notice">
+    <%= flash[:notice] %>
+  </p>
+  <div class="container px-5 px-sm-0">
+    <div class="row">
+      <div class="col-md-4">
+        <h2>マイページ</h2>
+        <div class="profile_image">
+          <%= attachment_image_tag @user, :profile_image, :fill, 100,100, fallback: "no_image.jpg" %>
+        </div>
+        <table class="table">
+          <tbody>
+            <tr></tr>
+            <tr>
+              <th>Name</th>
+              <td><%= @user.name %></td>
+            </tr>
+            <tr>
+              <th>目標</th>
+              <td><%= @user.goal %></td>
+            </tr>
+            <tr>
+              <th>一言</th>
+              <td><%= @user.introduction %></t>
+            </tr>
+          </tbody>
+        </table>
+        <div class="row">
+          <%= link_to '', edit_user_path(@user), class: 'btn btn-outline-secondary btn-block fas fa-user-cog edit_user_id' %>
+        </div>
+      </div>
+
+
+      <div class="col-md-7 offset-md-1">
+        <ul class="tab-list">
+          <li class="tab tab-active">投稿した質問</li>
+          <li class="tab">回答した質問</li>
+          <li class="tab">保存した質問</li>
+        </ul>
+        <div class="tabbox-contents">
+
+          <div class="tabbox box-show">
+              <table class="table">
+                <thread>
+                  <tr>
+                    <th>タイトル</th>
+                    <th>内容</th>
+                    <th colspan="3"></th>
+                  </tr>
+                  <tbody></tbody>
+                  </thread>
+                    <% @questions.first(10).each do |question| %>
+                  <thread>
+                    <tr>
+                    <td><%= link_to question.title, question_path(question.id) %></td>
+                    <td><%= link_to question.body.truncate(30), question_path(question.id) %></td>
+                    </tr>
+                </thread>
+                <% end %>
+              </table>
+            <%= paginate @questions %>
+          </div>
+
+          <div class="tabbox">
+              <table class="table">
+                <thread>
+                  <tr>
+                    <th>タイトル</th>
+                    <th>内容</th>
+                    <th colspan="3"></th>
+                  </tr>
+                  <tbody></tbody>
+                  </thread>
+                    <% @answered_questions.first(10).each do |question| %>
+                  <thread>
+                    <tr>
+                    <td><%= link_to question.title, question_path(question.id) %></td>
+                    <td><%= link_to question.body.truncate(30), question_path(question.id) %></td>
+                    </tr>
+                </thread>
+                <% end %>
+              </table>
+            <%= paginate @answered_questions %>
+          </div>
+
+          <div class="tabbox">
+              <table class="table">
+                <thread>
+                  <tr>
+                    <th>タイトル</th>
+                    <th>内容</th>
+                    <th colspan="3"></th>
+                  </tr>
+                  <tbody></tbody>
+                  </thread>
+                    <% @bookmark_lists.first(10).each do |question| %>
+                  <thread>
+                    <tr>
+                    <td><%= link_to question.title, question_path(question.id) %></td>
+                    <td><%= link_to question.body.truncate(30), question_path(question.id) %></td>
+                    </tr>
+                </thread>
+                <% end %>
+              </table>
+            <%= paginate @bookmark_lists %>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-
-
-<% if @user.id == current_user.id %>
-  <p><%= link_to "プロフィール編集", edit_user_path(@user) %></p>
-<% end %>
-
-<div>
-  <p>投稿した質問</p>
-    <table>
-      <tr>
-        <th>科目</th>
-        <th>タイトル</th>
-        <th>内容</th>
-        <th>理解度</th>
-        <th>コメント数</th>
-        <th>ステータス</th>
-      </tr>
-      <% @questions.each do |question| %>
-      <tr>
-        <td><%= question.subject %></td>
-        <td><%= link_to question.title, question_path(question.id) %></td>
-        <td><%= link_to question.body.truncate(30), question_path(question.id) %></td>
-        <td><%= question.status %></td>
-        <td><%= question.comments.count %></td>
-        <td><%= question.is_solved ? "解決済み":"回答受付中" %></td>
-      </tr>
-      <% end %>
-    </table>
-</div>
-
-<div>
-  <p>保存した質問</p>
-    <table>
-      <tr>
-        <th>科目</th>
-        <th>タイトル</th>
-        <th>内容</th>
-        <th>理解度</th>
-        <th>コメント数</th>
-        <th>ステータス</th>
-      </tr>
-      <% @bookmark_list.each do |question| %>
-      <tr>
-        <td><%= question.subject %></td>
-        <td><%= link_to question.title, question_path(question.id) %></td>
-        <td><%= link_to question.body.truncate(30), question_path(question.id) %></td>
-        <td><%= question.status %></td>
-        <td><%= question.comments.count %></td>
-        <td><%= question.is_solved ? "解決済み":"回答受付中" %></td>
-      </tr>
-      <% end %>
-    </table>
-</div>
-
-<div>
-  <p>回答した質問</p>
-    <table>
-      <tr>
-        <th>科目</th>
-        <th>タイトル</th>
-        <th>内容</th>
-        <th>理解度</th>
-        <th>コメント数</th>
-        <th>ステータス</th>
-      </tr>
-      <% @answered_question.each do |question| %>
-      <tr>
-        <td><%= question.subject %></td>
-        <td><%= link_to question.title, question_path(question.id) %></td>
-        <td><%= link_to question.body.truncate(30), question_path(question.id) %></td>
-        <td><%= question.status %></td>
-        <td><%= question.comments.count %></td>
-        <td><%= question.is_solved ? "解決済み":"回答受付中" %></td>
-      </tr>
-      <% end %>
-    </table>
-</div>
-
