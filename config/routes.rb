@@ -15,6 +15,6 @@ Rails.application.routes.draw do
     #resourceで単数形にすると/:idなしになる=>createとdestroyが同じrootパスになる
     resource :bookmarks, only: [:create, :destroy]
   end
-  resources :users, only: [:show, :edit, :update]
+  resources :users, only: [:show, :edit, :update, :index]
 
 end

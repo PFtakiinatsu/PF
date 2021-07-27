@@ -6,11 +6,11 @@
     <div class="row">
       <div class="col-md-12">
         <% if params[:order_sort] ==  "0" %>
-        <h4>新着質問</h4>
+        <h4>投稿した質問</h4>
         <% elsif params[:order_sort] ==  "1" %>
-        <h4>未解決の質問</h4>
+        <h4>回答した質問</h4>
         <% else %>
-        <h4>解決済の質問</h4>
+        <h4>保存した質問</h4>
         <% end %>
         <table class="table">
           <tr>
