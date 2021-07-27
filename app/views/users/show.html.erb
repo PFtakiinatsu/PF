@@ -56,12 +56,14 @@
                   <thread>
                     <tr>
                     <td><%= link_to question.title, question_path(question.id) %></td>
-                    <td><%= link_to question.body.truncate(30), question_path(question.id) %></td>
+                    <td><%= question.body.truncate(30) %></td>
                     </tr>
                 </thread>
                 <% end %>
               </table>
-            <%= paginate @questions %>
+            <div class="text-right">
+                <%= link_to "もっと見る", users_path(user_id: params[:id], order_sort: 0) %>
+            </div>
           </div>
 
           <div class="tabbox">
@@ -78,12 +80,16 @@
                   <thread>
                     <tr>
                     <td><%= link_to question.title, question_path(question.id) %></td>
-                    <td><%= link_to question.body.truncate(30), question_path(question.id) %></td>
+                    <td><%= question.body.truncate(30) %></td>
                     </tr>
                 </thread>
                 <% end %>
               </table>
-            <%= paginate @answered_questions, remote: true %>
+            <div class="text-right">
+              <% if @questions_amount.to_i >= 11 %>
+                <%= link_to "もっと見る", users_path(user_id: params[:id], order_sort: 1) %>
+              <% end %>
+            </div>
           </div>
 
           <div class="tabbox">
@@ -100,12 +106,16 @@
                   <thread>
                     <tr>
                     <td><%= link_to question.title, question_path(question.id) %></td>
-                    <td><%= link_to question.body.truncate(30), question_path(question.id) %></td>
+                    <td><%= question.body.truncate(30) %></td>
                     </tr>
                 </thread>
                 <% end %>
               </table>
-            <%= paginate @bookmark_lists %>
+            <div class="text-right">
+                <% if @questions_amount.to_i >= 11 %>
+                <%= link_to "もっと見る", users_path(user_id: params[:id], order_sort: 2) %>
+              <% end %>
+            </div>
           </div>
         </div>
       </div>

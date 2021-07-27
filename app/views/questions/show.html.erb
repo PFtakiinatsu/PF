@@ -1,3 +1,36 @@
+<main>
+  <p id="notice">
+    <%= flash[:notice] %>
+  </p>
+  <div class="container px-5 px-sm-0">
+    <div class="row">
+      <div class="article">
+        <div class="image">
+          <%= attachment_image_tag @question.user, :profile_image, size:"50x50" %>
+        </div>
+        <div class="user">
+          <%= link_to @question.user.name, user_path(@question.user) %>
+        </div>
+        <div class="date">
+          <%= @question.created_at %>
+        </div>
+        <div class="question">
+          <%= @question.body %>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+  <p id="notice">
+    <%= flash[:notice] %>
+  </p>
+  <div class="container px-5 px-sm-0">
+    <div class="row">
+
+<div class="wrapper">
+
+</div>
+
 <h2>タイトル</h2>
 <p><%= @question.title %> ステータス: <%= @question.is_solved ? "解決済み":"回答受付中" %></p>
 <p><%= @question.user.name %></p>
