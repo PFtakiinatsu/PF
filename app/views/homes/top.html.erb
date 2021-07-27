@@ -34,7 +34,9 @@
                 </tr>
                 <% end %>
               </table>
-            <%= paginate @questions %>
+              <div class="text-right">
+                <%= link_to "もっと見る", questions_path(order_sort: 0) %>
+              </div>
           </div>
 
           <div class="tabbox">
@@ -58,7 +60,9 @@
                 </tr>
                 <% end %>
               </table>
-            <%= paginate @unsolved_questions %>
+              <div class="text-right">
+                <%= link_to "もっと見る", questions_path(order_sort: 1) %>
+              </div>
           </div>
 
           <div class="tabbox">
@@ -82,7 +86,9 @@
                 </tr>
                 <% end %>
               </table>
-            <%= paginate @solved_questions %>
+              <div class="text-right">
+                <%= link_to "もっと見る", questions_path(order_sort: 2) %>
+              </div>
           </div>
         </div>
       </div>
@@ -92,16 +98,16 @@
   <div class="col-md-12">
     <h4>ランキング</h4>
       <table>
-        <% @users.each.with_index(1) do |user, i| %>
+        <% @users.first(5).each.with_index(1) do |user, i| %>
         <tr>
           <% if i == 1 %>
-          <td><%= image_tag 'first.png',:width => '60' %> <%= attachment_image_tag user, :profile_image, size:"80x80" %> <%= link_to user.name, user_path(user.id) %></td>
+          <td><%= image_tag 'first.png',:width => '60' %> <%= attachment_image_tag user, :profile_image, size:"80x80", fallback: "no_image.jpg"  %> <%= link_to user.name, user_path(user.id) %></td>
           <% elsif i == 2 %>
-          <td><%= image_tag 'second.png',:width => '60' %> <%= attachment_image_tag user, :profile_image, size:"80x80" %> <%= link_to user.name, user_path(user.id) %></td>
+          <td><%= image_tag 'second.png',:width => '60' %> <%= attachment_image_tag user, :profile_image, size:"80x80", fallback: "no_image.jpg"  %> <%= link_to user.name, user_path(user.id) %></td>
           <% elsif i == 3 %>
-          <td><%= image_tag 'third.png',:width => '60' %> <%= attachment_image_tag user, :profile_image, size:"80x80" %> <%= link_to user.name, user_path(user.id) %></td>
+          <td><%= image_tag 'third.png',:width => '60' %> <%= attachment_image_tag user, :profile_image, size:"80x80", fallback: "no_image.jpg"  %> <%= link_to user.name, user_path(user.id) %></td>
           <% else %>
-          <td>第<%= i %>位 <%= attachment_image_tag user, :profile_image, size:"80x80" %> <%= link_to user.name, user_path(user.id) %></td>
+          <td>第<%= i %>位 <%= attachment_image_tag user, :profile_image, size:"80x80", fallback: "no_image.jpg"  %> <%= link_to user.name, user_path(user.id) %></td>
           <% end %>
           <td><%= user.word %></td>
           <td><%= user.point %>ポイント</td>

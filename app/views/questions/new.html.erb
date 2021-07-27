@@ -1,17 +1,50 @@
-<h1>新規投稿</h1>
-<%= form_with model: @question, url:"/questions", local:true do |f| %>
-  <h4>科目</h4>
-  <%= f.select :subject, Question.subjects.keys, {} %>
-  <h4>タイトル</h4>
-  <%= f.text_field :title %>
-  <h4>質問内容</h4>
-  <%= f.text_area :body %>
-  <h4>画像</h4>
-  <%= f.attachment_field :image %>
-  <h4>理解度</h4>
-  <%= f.select :status, Question.statuses.keys, {} %>
-  <h4>サンクスポイント</h4>
-  <%= f.text_field :point %>
+<main>
+  <p id="notice">
+    <%= flash[:notice] %>
+  </p>
+  <div class="container px-5 px-sm-0 form-wrapper">
+    <div class="row">
+      <div class="col-md-12">
+        <h2>質問投稿</h2>
+        <%= form_with model: @question, url:"/questions", local:true do |f| %>
+          <div class="form-group">
+            <%= f.label :subject, '科目' %>
+            <%= f.select :subject, Question.subjects.keys, {} %>
+          </div>
 
-  <%= f.submit "投稿する" %>
-<% end %>
+          <div class="form-group">
+            <%= f.label :title, 'タイトル' %>
+            <%= f.text_field :title, class: 'form-control' %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :body, '質問内容' %>
+            <%= f.text_area :body, :size => "80x5", class: 'form-control' %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :image, '画像' %>
+            <%= f.attachment_field :image %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :status, '理解度' %>
+            <%= f.select :status, Question.statuses.keys, {} %>
+          </div>
+
+
+          <div class="form-group" >
+            <p>サンクスポイント（保有ポイント:<%= current_user.point %>P）</p>
+            <div class="small-form">
+              <%= f.text_field :point, class: 'form-control' %>
+            </div>
+          </div>
+
+          <div class="al-c"><%= f.submit '投稿する', class: 'btn btn-primary' %></div>
+
+        </div>
+
+    </div>
+  </div>
+  <% end %>
+

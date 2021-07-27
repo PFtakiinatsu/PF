@@ -4,6 +4,7 @@ class QuestionsController < ApplicationController
 
   def new
     @question = Question.new
+    @user = current_user
   end
 
   def create
@@ -20,7 +21,13 @@ class QuestionsController < ApplicationController
   def index
     #gem "kaminari"を使用　ペジネーションをつけたいデータに.page(params[:page])を追加
     #perで表示件数を変える（デフォルトは25件）
-    @questions = Question.all.page(params[:page]).per(5)
+    if params[:order_sort] ==  "0"
+      @questions = Question.all.page(params[:page]).per(10)
+    elsif params[:order_sort] == "1"
+      @questions = Question.where(is_solved: false).page(params[:page]).per(10)
+    else
+      @questions = Question.where(is_solved: true).page(params[:page]).per(10)
+    end
   end
 
   def show
@@ -54,7 +61,7 @@ class QuestionsController < ApplicationController
   end
 
   def search
-    @questions = Question.search(params[:search])
+    @questions = Question.search(params[:search]).page(params[:page]).per(10)
   end
 
   def destroy
