@@ -32,9 +32,8 @@
             <%= f.select :status, Question.statuses.keys, {} %>
           </div>
 
-
           <div class="form-group" >
-            <p>サンクスポイント（保有ポイント:<%= current_user.point %>P）</p>
+            <p>サンクスポイント（保有ポイント:<%= current_user.point %>P）※サンクスポイントをつけると質問に答えてもらいやすくなります！</p>
             <div class="small-form">
               <%= f.text_field :point, class: 'form-control' %>
             </div>

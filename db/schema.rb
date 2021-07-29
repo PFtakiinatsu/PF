@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_26_075044) do
+ActiveRecord::Schema.define(version: 2021_07_29_040638) do
 
   create_table "bookmarks", force: :cascade do |t|
     t.integer "user_id"
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 2021_07_26_075044) do
     t.string "image_id"
     t.string "title"
     t.text "body"
-    t.integer "point"
+    t.integer "point", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "best_answer_id"
