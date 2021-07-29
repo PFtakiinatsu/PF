@@ -1,6 +1,6 @@
 class QuestionsController < ApplicationController
   #ログイン済みユーザーにのみアクセスを許可
-  before_action :authenticate_user!
+  before_action :authenticate_user!,only: [:edit, :update, :new]
 
   def new
     @question = Question.new
@@ -8,16 +8,16 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    question = Question.new(question_params)
-    question.user_id = current_user.id
-    if question.save
-      user = question.user
+    @question = Question.new(question_params)
+    @question.user_id = current_user.id
+    @user = current_user
+    if @question.save
       user_point = current_user.point
-      point_sum = user_point - question.point
-      user.update(point: point_sum)
-      redirect_to question_path(question.id)
+      point_sum = user_point - @question.point
+      @user.update(point: point_sum)
+      redirect_to question_path(@question.id)
     else
-      render "questions/new"
+      render :new
     end
   end
 
@@ -41,6 +41,7 @@ class QuestionsController < ApplicationController
     end
     # @commentsはベストアンサー以外のコメント
     @comments = Comment.where(question_id: @question.id).where.not(id: @question.best_answer_id)
+    @comments_amount = Comment.where(question_id: @question.id).where.not(id: @question.best_answer_id).count
     @comment = Comment.new
   end
 

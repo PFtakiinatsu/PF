@@ -4,7 +4,7 @@
     <title>PF</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    
+
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
@@ -49,7 +49,16 @@
     </div>
   </div>
 </nav>
+<main>
+  <% if flash[:notice] %>
+          <div class="alert alert-info"><%= flash[:notice] %></div>
+         <% end %>
+        <% if flash[:alert] %>
+          <div class="alert alert-danger"><%= flash[:alert] %></div>
+        <% end %>
     <%= yield %>
+</main>
+
 
     <footer>
     　<div class="container mt-5">

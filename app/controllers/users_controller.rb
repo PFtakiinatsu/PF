@@ -1,21 +1,36 @@
 class UsersController < ApplicationController
+  #ログイン済みユーザーにのみアクセスを許可
+  before_action :authenticate_user!
+
   def show
     @user = User.find(params[:id])
     @questions = Question.where(user_id: @user.id)
+    @questions_amount = Question.where(user_id: @user.id).count
     bookmarks = Bookmark.where(user_id: current_user.id).pluck(:question_id)
     @bookmark_lists = Question.find(bookmarks)
+    @bookmark_lists_amount = Question.find(bookmarks).count
     comments = Comment.where(user_id: current_user.id).pluck(:question_id)
     @answered_questions = Question.find(comments)
+    @answered_questions_amount = Question.find(comments).count
   end
 
   def edit
     @user = User.find(params[:id])
+    #ログイン中のユーザー以外の編集ページには遷移できない
+    if @user.id == current_user.id
+      render :edit
+    else
+      redirect_to root_path
+    end
   end
 
   def update
     @user = User.find(params[:id])
-    @user.update(user_params)
-    redirect_to user_path(@user.id)
+    if @user.update(user_params)
+      redirect_to user_path(@user.id)
+    else
+      render :edit
+    end
   end
 
   def index
@@ -26,7 +41,6 @@ class UsersController < ApplicationController
     elsif params[:order_sort] == "1"
       comments = Comment.where(user_id: @user.id).pluck(:question_id)
       @questions = Question.find(comments)
-      @questions_amount = Question.find(comments).count
       @questions = Kaminari.paginate_array(@questions).page(params[:page])
     else
       bookmarks = Bookmark.where(user_id: @user.id).pluck(:question_id)

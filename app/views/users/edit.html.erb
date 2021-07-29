@@ -2,6 +2,15 @@
   <p id="notice">
     <%= flash[:notice] %>
   </p>
+  <% if @user.errors.any? %>
+    <div id="error-explanation">
+      <ul>
+         <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+         <% end %>
+      </ul>
+    </div>
+  <% end %>
   <%= form_with model:@user, local:true do |f| %>
   <div class="container px-5 px-sm-0">
     <div class="row">
@@ -10,8 +19,8 @@
 
     <div class="row">
       <div class="col-md-4">
-        <div class="profile_image img-rounded">
-          <%= attachment_image_tag @user, :profile_image, :fill, 200,200, fallback: "no_image.jpg", class: 'img-rounded' %>
+        <div class="profile_image edit_image">
+          <%= attachment_image_tag @user, :profile_image, size:"200x200", fallback: "no_image.jpg", class: 'rounded-circle edit_image' %>
         </div>
           <%= f.attachment_field :profile_image, fallback: "no_image.jpg" %>
       </div>
@@ -21,11 +30,6 @@
           <div class="form-group">
             <%= f.label :name, 'ユーザーネーム' %>
             <%= f.text_field :name, class: 'form-control' %>
-          </div>
-
-          <div class="form-group">
-            <%= f.label :email, 'メールアドレス' %>
-            <%= f.email_field :email, class: 'form-control' %>
           </div>
 
           <div class="form-group">

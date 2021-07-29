@@ -2,6 +2,15 @@
   <p id="notice">
     <%= flash[:notice] %>
   </p>
+  <% if @question.errors.any? %>
+    <div id="error-explanation">
+      <ul>
+         <% @question.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+         <% end %>
+      </ul>
+    </div>
+  <% end %>
   <div class="container px-5 px-sm-0 form-wrapper">
     <div class="row">
       <div class="col-md-12">

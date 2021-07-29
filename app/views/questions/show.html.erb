@@ -2,14 +2,25 @@
   <p id="notice">
     <%= flash[:notice] %>
   </p>
+    <% if @comment.errors.any? %>
+    <div id="error-explanation">
+      <ul>
+         <% @comment.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+         <% end %>
+      </ul>
+    </div>
+  <% end %>
   <div class="container px-5 px-sm-0">
     <div class="row">
       <div class="col-md-12">
         <h4><%= @question.title %></h4>
           <div class="article wrapper">
+            <% if user_signed_in? %>
             <div id="bookmark_<%= @question.id %>">
               <%= render "bookmarks/bookmark", question: @question %>
             </div>
+            <% end %>
             <div class="question-user-image">
               <%= attachment_image_tag @question.user, :profile_image, size:"60x60", fallback: "no_image.jpg"  %>
             </div>
@@ -18,6 +29,11 @@
             <div class="question">
               <%= @question.body %>
             </div>
+            <% if @question.user == current_user %>
+              <div class="comment-delete">
+                <%= link_to "削除", question_path(@question), method: :delete, class: "btn btn-danger"%>
+              </div>
+              <% end %>
           </div>
 
           <div class="wrapper">
@@ -33,19 +49,16 @@
               <div>
                 <%= @best_answer.body %>
               </div>
-              <% if @best_answer.user == current_user %>
-              <div class="comment-delete">
-                <%= link_to "削除", question_comment_path(@best_answer.question, @question), method: :delete %>
-              </div>
-              <% end %>
             <% end %>
           </div>
 
           <div class="answer">
             <div>
-              <% if @question.best_answer_id %>
+              <!--ベストアンサーが決まっていて、他のコメントもあるとき-->
+              <% if @question.best_answer_id && @comments_amount != 0 %>
               <h5>その他の回答</h5>
-              <% else %>
+              <!--ベストアンサーが決まっていないが、コメントはあるとき-->
+              <% elsif @question.best_answer_id == nil && @comments_amount != 0 %>
               <h5>回答</h5>
               <% end %>
             </div>
@@ -75,7 +88,7 @@
               <% end %>
           </div>
 
-           <% unless @question.best_answer_id %>
+           <% if @question.best_answer_id == nil && user_signed_in? %>
               <div class="new-comment form-group">
                 <%= form_with(model:[@question, @comment], local: true) do |f| %>
                 <div class="form-group">

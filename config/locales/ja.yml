@@ -8,6 +8,12 @@ ja:
       truncate: "..."
 
   activerecord:
+    attributes:
+        question:
+          title: タイトル
+          body: 内容
+        comment:
+          body: 内容
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'
