@@ -16,7 +16,10 @@
 勉強でわからないことがあるとき
 
 ## 設計書
-<...>
+### テーブル定義書
+https://docs.google.com/spreadsheets/d/16zTGs82u4MkXGIhmLSltoY2L-Wc9WoEk/edit#gid=1460233573
+### 画面遷移図
+https://app.diagrams.net/#G1apkvqmXiqDQOb5JqRFQlhVFkyGyTPIYl
 
 ## チャレンジ要素一覧
 <https://docs.google.com/spreadsheets/d/1-AqwgmBq3G7R6l33489pWdB0mPchbVngSHzhwkAW85A/edit?usp=sharing>
