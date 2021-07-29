@@ -10,12 +10,15 @@ class QuestionsController < ApplicationController
   def create
     question = Question.new(question_params)
     question.user_id = current_user.id
-    question.save
-    user = question.user
-    user_point = current_user.point
-    point_sum = user_point - question.point
-    user.update(point: point_sum)
-    redirect_to question_path(question.id)
+    if question.save
+      user = question.user
+      user_point = current_user.point
+      point_sum = user_point - question.point
+      user.update(point: point_sum)
+      redirect_to question_path(question.id)
+    else
+      render "questions/new"
+    end
   end
 
   def index

@@ -1,13 +1,13 @@
 <% if question.bookmarked_by?(current_user) %>
     <p>
       <%= link_to question_bookmarks_path(question.id), method: :delete, remote: true do %>
-        ♥<%= question.bookmarks.count %> いいね
+        <i class="fas fa-bookmark bookmark fa-2x"></i>
       <% end %>
     </p>
     <% else %>
     <p>
       <%= link_to question_bookmarks_path(question.id), method: :post, remote: true do %>
-        ♡<%= question.bookmarks.count %> いいね
+        <i class="far fa-bookmark bookmark fa-2x"></i>
       <% end %>
     </p>
 <% end %>
