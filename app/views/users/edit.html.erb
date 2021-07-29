@@ -1,17 +1,48 @@
-<h2>プロフィール編集</h2>
-<%= form_with model:@user, local:true do |f| %>
-  <div class="form-group">
-    <label for="user_name">ユーザーネーム</label></br>
-    <%= f.text_field :name, autofocus: true, placeholder:"名前" %>
-    <%= f.attachment_field :profile_image, fallback: "no_image.jpg" %>
+<main>
+  <p id="notice">
+    <%= flash[:notice] %>
+  </p>
+  <%= form_with model:@user, local:true do |f| %>
+  <div class="container px-5 px-sm-0">
+    <div class="row">
+      <h2>プロフィール編集</h2>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4">
+        <div class="profile_image img-rounded">
+          <%= attachment_image_tag @user, :profile_image, :fill, 200,200, fallback: "no_image.jpg", class: 'img-rounded' %>
+        </div>
+          <%= f.attachment_field :profile_image, fallback: "no_image.jpg" %>
+      </div>
+
+      <div class="mx-auto col-md-7 offset-md-1">
+
+          <div class="form-group">
+            <%= f.label :name, 'ユーザーネーム' %>
+            <%= f.text_field :name, class: 'form-control' %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :email, 'メールアドレス' %>
+            <%= f.email_field :email, class: 'form-control' %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :word, 'ひとこと' %>
+            <%= f.text_field :word, class: 'form-control' %>
+          </div>
+
+
+          <div class="form-group">
+            <%= f.label :introduction, '自己紹介（300文字以内）' %>
+            <%= f.text_area :introduction, :maxlength => "300", :size => "80x5",  class: 'form-control'  %>
+          </div>
+
+          <div class="al-c"><%= f.submit 'プロフィール編集を完了する', class: 'btn btn-primary' %></div>
+
+      </div>
+
+    </div>
   </div>
-  <div>
-    <label for="user_goal">目標</label></br>
-    <%= f.text_field :goal %>
-  </div>
-  <div>
-    <label for="user_body">自己紹介</label></br>
-    <%= f.text_area :introduction %>
-  </div>
-  <%= f.submit "変更を保存" %>
-<% end %>
+  <% end %>

@@ -1,72 +1,95 @@
-<h2>タイトル</h2>
-<p><%= @question.title %> ステータス: <%= @question.is_solved ? "解決済み":"回答受付中" %></p>
-<p><%= @question.user.name %></p>
+<main>
+  <p id="notice">
+    <%= flash[:notice] %>
+  </p>
+  <div class="container px-5 px-sm-0">
+    <div class="row">
+      <div class="col-md-12">
+        <h4><%= @question.title %></h4>
+          <div class="article wrapper">
+            <div id="bookmark_<%= @question.id %>">
+              <%= render "bookmarks/bookmark", question: @question %>
+            </div>
+            <div class="question-user-image">
+              <%= attachment_image_tag @question.user, :profile_image, size:"60x60", fallback: "no_image.jpg"  %>
+            </div>
+            <p><%= link_to @question.user.name, user_path(@question.user) %></br>
+            <%= @question.created_at.to_s(:datetime) %></p>
+            <div class="question">
+              <%= @question.body %>
+            </div>
+          </div>
 
-<div id="bookmark_<%= @question.id %>">
-  <%= render "bookmarks/bookmark", question: @question %>
-</div>
+          <div class="wrapper">
+            <% if @question.best_answer_id != nil %>
+              <div>
+                <h5>ベストアンサー</h5>
+              </div>
+              <div class="question-user-image">
+                <%= attachment_image_tag @best_answer.user, :profile_image, size:"60x60", fallback: "no_image.jpg"  %>
+              </div>
+              <p><%= link_to @best_answer.user.name, user_path(@best_answer.user) %></br>
+              <%= @best_answer.created_at.to_s(:datetime) %></p>
+              <div>
+                <%= @best_answer.body %>
+              </div>
+              <% if @best_answer.user == current_user %>
+              <div class="comment-delete">
+                <%= link_to "削除", question_comment_path(@best_answer.question, @question), method: :delete %>
+              </div>
+              <% end %>
+            <% end %>
+          </div>
 
-<h2>質問内容</h2>
-<p><%= @question.body %></p>
-<%= attachment_image_tag @question, :image, size:"50x50" %>
-<% if @question.user == current_user %>
-<%= link_to "編集", edit_question_path(@question.id) %>
-<%= link_to "削除", question_path(@question.id), method: :delete, "data-confirm" =>"本当に削除しますか？" %>
-<% end %>
+          <div class="answer">
+            <div>
+              <% if @question.best_answer_id %>
+              <h5>その他の回答</h5>
+              <% else %>
+              <h5>回答</h5>
+              <% end %>
+            </div>
+              <% @comments.each do |comment| %>
+            <div class="wrapper">
+              <div class="question-user-image">
+                <%= attachment_image_tag comment.user, :profile_image, size:"60x60", fallback: "no_image.jpg"  %>
+              </div>
+              <p><%= link_to comment.user.name, user_path(comment.user) %></br><%= comment.created_at.to_s(:datetime) %></p>
+                <%= comment.body %>
+                <% if comment.user == current_user %>
+                <div class="comment-delete">
+                  <%= link_to "削除", question_comment_path(comment.question, @question), method: :delete, class: "btn btn-danger" %>
+                </div>
+              <% end %>
+              </div>
+              <!--ベストアンサーがまだ決まっていないとき、質問したユーザーはベストアンサーを選ぶことができる-->
+               <% if @question.user == current_user and @question.best_answer_id == nil %>
+                  <%= form_with model: @question, local:true, data: {confirm: "#{comment.user.name}さんの回答をベストアンサーにします。この修正は変更できませんが、よろしいですか？"} do |f| %>
+                    <%= f.hidden_field :best_answer_id, value: comment.id %>
+                    <%= f.hidden_field :point, value: comment.user.point.to_i + @question.point %>
+                    <div class="form-group best_answer" >
+                      <%= f.submit "ベストアンサーに選ぶ",class: 'btn btn-outline-warning best_answer' %>
+                    </div>
+                  <% end %>
+                <% end %>
+              <% end %>
+          </div>
 
-<div class="comments">
-  <p>コメント件数: <%= @question.comments.count %></p>
-  <% if @question.best_answer_id != nil %>
-  <div>
-    <div>
-      <%= attachment_image_tag @best_answer.user, :profile_image, size:"50x50" %>
-    </div>
-    <div>
-      <%= @best_answer.user.name %>&nbsp; ベストアンサー！
-    </div>
-    <div>
-      <%= @best_answer.body %>
-    </div>
-    <% if @best_answer.user == current_user %>
-    <div class="comment-delete">
-      <%= link_to "削除", question_comment_path(@best_answer.question, @question), method: :delete %>
-    </div>
-    <% end %>
-  <% end %>
-  </div>
-
-  <% @comments.each do |comment| %>
-    <div>
-      <%= attachment_image_tag comment.user, :profile_image, size:"50x50" %>
-    </div>
-    <div>
-      <%= comment.user.name %>
-    </div>
-    <div>
-      <%= comment.body %>
-    </div>
-    <% if comment.user == current_user %>
-    <div class="comment-delete">
-      <%= link_to "削除", question_comment_path(comment.question, @question), method: :delete %>
-    </div>
-    <% end %>
-
-  <!--ベストアンサーがまだ決まっていないとき、質問したユーザーはベストアンサーを選ぶことができる-->
-   <% if @question.user == current_user and @question.best_answer_id == nil %>
-      <%= form_with model: @question, local:true, data: {confirm: "#{comment.user.name}さんの回答をベストアンサーにします。この修正は変更できませんが、よろしいですか？"} do |f| %>
-        <%= f.hidden_field :best_answer_id, value: comment.id %>
-        <div class="actions">
-          <%= f.submit "ベストアンサーに選ぶ" %>
+           <% unless @question.best_answer_id %>
+              <div class="new-comment form-group">
+                <%= form_with(model:[@question, @comment], local: true) do |f| %>
+                <div class="form-group">
+                  <%= f.text_area :body, rows:"5",placeholder: "回答を入力する", class: 'form-control' %>
+                </div>
+                <div class="form-group">
+                  <%= f.submit "送信する", class: 'btn btn-primary' %>
+                </div>
+                <% end %>
+              </div>
+            <% end %>
         </div>
-      <% end %>
-    <% end %>
-  <% end %>
+      </div>
 
- <% unless @question.best_answer_id %>
-    <div class="new-comment">
-      <%= form_with(model:[@question, @comment], local: true) do |f| %>
-        <%= f.text_area :body, rows:"5",placeholder: "回答を入力する" %>
-        <%= f.submit "送信する" %>
-      <% end %>
     </div>
-  <% end %>
+  </div>
+</main>
