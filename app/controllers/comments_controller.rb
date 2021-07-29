@@ -14,7 +14,7 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    Comment.find_by(id: params[:id], question_id: params[:question_id]).destroy
+    Comment.find_by(params[:id]).destroy
     redirect_to question_path(params[:question_id])
   end
 
