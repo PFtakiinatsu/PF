@@ -29,6 +29,9 @@
             <div class="question">
               <%= @question.body %>
             </div>
+            <div class="question">
+              <%= attachment_image_tag @question, :image, :width => '200' %>
+            </div>
             <% if @question.user == current_user %>
               <div class="comment-delete">
                 <%= link_to "削除", question_path(@question), method: :delete, class: "btn btn-danger"%>
