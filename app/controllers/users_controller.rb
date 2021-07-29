@@ -6,10 +6,10 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @questions = Question.where(user_id: @user.id)
     @questions_amount = Question.where(user_id: @user.id).count
-    bookmarks = Bookmark.where(user_id: current_user.id).pluck(:question_id)
+    bookmarks = Bookmark.where(user_id: @user.id).pluck(:question_id)
     @bookmark_lists = Question.find(bookmarks)
     @bookmark_lists_amount = Question.find(bookmarks).count
-    comments = Comment.where(user_id: current_user.id).pluck(:question_id)
+    comments = Comment.where(user_id: @user.id).pluck(:question_id)
     @answered_questions = Question.find(comments)
     @answered_questions_amount = Question.find(comments).count
   end
