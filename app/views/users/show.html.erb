@@ -78,7 +78,7 @@
               </table>
             <div class="text-right">
               <% if @questions_amount.to_i >= 11 %>
-                <%= link_to "もっと見る", users_path(user_id: params[:id], order_sort: 1) %>
+                <%= link_to "もっと見る", users_path(user_id: params[:id], order_sort: 0) %>
               <% end %>
             </div>
           </div>
