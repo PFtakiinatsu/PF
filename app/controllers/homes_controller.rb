@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class HomesController < ApplicationController
   def top
     @questions = Question.all.page(params[:page]).per(10)
@@ -7,6 +9,5 @@ class HomesController < ApplicationController
     @users = User.all.order(point: :desc)
   end
 
-  def about
-  end
+  def about; end
 end

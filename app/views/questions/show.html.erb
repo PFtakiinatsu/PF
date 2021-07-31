@@ -22,7 +22,7 @@
             </div>
             <% end %>
             <div class="question-user-image">
-              <%= attachment_image_tag @question.user, :profile_image, size:"60x60", fallback: "no_image.jpg"  %>
+              <%= attachment_image_tag @question.user, :profile_image, size:"60x60", fallback: "no_image.jpg", class: 'rounded-circle'  %>
             </div>
             <p><%= link_to @question.user.name, user_path(@question.user) %></br>
             <%= @question.created_at.to_s(:datetime) %></p>
@@ -45,7 +45,7 @@
                 <h5>ベストアンサー</h5>
               </div>
               <div class="question-user-image">
-                <%= attachment_image_tag @best_answer.user, :profile_image, size:"60x60", fallback: "no_image.jpg"  %>
+                <%= attachment_image_tag @best_answer.user, :profile_image, size:"60x60", fallback: "no_image.jpg",class: 'rounded-circle'  %>
               </div>
               <p><%= link_to @best_answer.user.name, user_path(@best_answer.user) %></br>
               <%= @best_answer.created_at.to_s(:datetime) %></p>
@@ -68,7 +68,7 @@
               <% @comments.each do |comment| %>
             <div class="wrapper">
               <div class="question-user-image">
-                <%= attachment_image_tag comment.user, :profile_image, size:"60x60", fallback: "no_image.jpg"  %>
+                <%= attachment_image_tag comment.user, :profile_image, size:"60x60", fallback: "no_image.jpg", class: 'rounded-circle'  %>
               </div>
               <p><%= link_to comment.user.name, user_path(comment.user) %></br><%= comment.created_at.to_s(:datetime) %></p>
                 <%= comment.body %>

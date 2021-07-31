@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class BookmarksController < ApplicationController
-  before_action :authenticate_user!,only: [:create, :destroy]
+  before_action :authenticate_user!, only: %i[create destroy]
 
   def create
     @question = Question.find(params[:question_id])

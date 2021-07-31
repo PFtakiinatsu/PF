@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class UsersController < ApplicationController
-  #ログイン済みユーザーにのみアクセスを許可
+  # ログイン済みユーザーにのみアクセスを許可
   before_action :authenticate_user!
 
   def show
@@ -16,7 +18,7 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
-    #ログイン中のユーザー以外の編集ページには遷移できない
+    # ログイン中のユーザー以外の編集ページには遷移できない
     if @user.id == current_user.id
       render :edit
     else
@@ -36,9 +38,10 @@ class UsersController < ApplicationController
   def index
     user_id = params[:user_id]
     @user = User.find(user_id)
-    if params[:order_sort] ==  "0"
+    case params[:order_sort]
+    when '0'
       @questions = Question.where(user_id: @user.id).page(params[:page]).per(10)
-    elsif params[:order_sort] == "1"
+    when '1'
       comments = Comment.where(user_id: @user.id).pluck(:question_id)
       @questions = Question.find(comments)
       @questions = Kaminari.paginate_array(@questions).page(params[:page])

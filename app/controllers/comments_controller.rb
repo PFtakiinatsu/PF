@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CommentsController < ApplicationController
   def create
     question = Question.find(params[:question_id])
@@ -9,7 +11,7 @@ class CommentsController < ApplicationController
     if @comment.save
       redirect_to question_path(params[:question_id])
     else
-      render "questions/show"
+      render 'questions/show'
     end
   end
 
