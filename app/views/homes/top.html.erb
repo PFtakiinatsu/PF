@@ -24,7 +24,7 @@
                 <% @questions.first(5).each do |question| %>
                 <tr>
                   <td><%= question.subject %></td>
-                  <td><%= link_to question.title, question_path(question.id) %></td>
+                  <td><%= link_to question.title.truncate(13), question_path(question.id) %></td>
                   <td><%= question.status %></td>
                   <td><%= question.comments.count %></td>
                   <td><%= question.is_solved ? "解決済":"未解決" %></td>
@@ -50,7 +50,7 @@
                 <% @unsolved_questions.first(5).each do |question| %>
                 <tr>
                   <td><%= question.subject %></td>
-                  <td><%= link_to question.title, question_path(question.id) %></td>
+                  <td><%= link_to question.title.truncate(13), question_path(question.id) %></td>
                   <td><%= question.status %></td>
                   <td><%= question.comments.count %></td>
                   <td><%= question.is_solved ? "解決済":"未解決" %></td>
@@ -76,7 +76,7 @@
                 <% @solved_questions.first(5).each do |question| %>
                 <tr>
                   <td><%= question.subject %></td>
-                  <td><%= link_to question.title, question_path(question.id) %></td>
+                  <td><%= link_to question.title.truncate(13), question_path(question.id) %></td>
                   <td><%= question.status %></td>
                   <td><%= question.comments.count %></td>
                   <td><%= question.is_solved ? "解決済":"未解決" %></td>

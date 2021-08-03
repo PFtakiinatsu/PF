@@ -27,16 +27,21 @@
             <p><%= link_to @question.user.name, user_path(@question.user) %></br>
             <%= @question.created_at.to_s(:datetime) %></p>
             <div class="question">
-              <%= @question.body %>
+              <%= simple_format(@question.body) %>
             </div>
             <div class="question">
               <%= attachment_image_tag @question, :image, :width => '200' %>
             </div>
             <% if @question.user == current_user %>
-              <div class="comment-delete">
+            <div class="question-btn">
+              <div class="question-delete">
                 <%= link_to "削除", question_path(@question), method: :delete, class: "btn btn-danger"%>
               </div>
-              <% end %>
+              <div class="question-edit">
+                <%= link_to "編集", edit_question_path(@question), class: "btn btn-success"%>
+              </div>
+            </div>
+            <% end %>
           </div>
 
           <div class="wrapper">
@@ -50,7 +55,7 @@
               <p><%= link_to @best_answer.user.name, user_path(@best_answer.user) %></br>
               <%= @best_answer.created_at.to_s(:datetime) %></p>
               <div>
-                <%= @best_answer.body %>
+                <%= simple_format(@best_answer.body) %>
               </div>
             <% end %>
           </div>
@@ -71,7 +76,7 @@
                 <%= attachment_image_tag comment.user, :profile_image, size:"60x60", fallback: "no_image.jpg", class: 'rounded-circle'  %>
               </div>
               <p><%= link_to comment.user.name, user_path(comment.user) %></br><%= comment.created_at.to_s(:datetime) %></p>
-                <%= comment.body %>
+                <%= simple_format(comment.body) %>
                 <% if comment.user == current_user %>
                 <div class="comment-delete">
                   <%= link_to "削除", question_comment_path(comment), method: :delete, class: "btn btn-danger" %>

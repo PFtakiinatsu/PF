@@ -39,10 +39,11 @@ class QuestionsController < ApplicationController
   def show
     @question = Question.find(params[:id])
     # @best_answerにベストアンサーコメントを定義
-    @best_answer = Comment.find(@question.best_answer_id) unless @question.best_answer_id.nil?
+    if @question.best_answer_id
+      @best_answer = Comment.find(@question.best_answer_id)
+    end
     # @commentsはベストアンサー以外のコメント
     @comments = Comment.where(question_id: @question.id).where.not(id: @question.best_answer_id)
-    @comments_amount = Comment.where(question_id: @question.id).where.not(id: @question.best_answer_id).count
     @comment = Comment.new
   end
 

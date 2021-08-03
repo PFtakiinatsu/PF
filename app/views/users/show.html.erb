@@ -70,7 +70,7 @@
                     <% @questions.first(10).each do |question| %>
                   <thread>
                     <tr>
-                    <td><%= link_to question.title, question_path(question.id) %></td>
+                    <td><%= link_to question.title.truncate(13), question_path(question.id) %></td>
                     <td><%= question.body.truncate(30) %></td>
                     </tr>
                 </thread>
@@ -96,7 +96,7 @@
                     <% @answered_questions.first(10).each do |question| %>
                   <thread>
                     <tr>
-                    <td><%= link_to question.title, question_path(question.id) %></td>
+                    <td><%= link_to question.title.truncate(13), question_path(question.id) %></td>
                     <td><%= question.body.truncate(30) %></td>
                     </tr>
                 </thread>
@@ -122,7 +122,7 @@
                     <% @bookmark_lists.first(10).each do |question| %>
                   <thread>
                     <tr>
-                    <td><%= link_to question.title, question_path(question.id) %></td>
+                    <td><%= link_to question.title.truncate(13), question_path(question.id) %></td>
                     <td><%= question.body.truncate(30) %></td>
                     </tr>
                 </thread>
