@@ -45,6 +45,7 @@ class QuestionsController < ApplicationController
     # @commentsはベストアンサー以外のコメント
     @comments = Comment.where(question_id: @question.id).where.not(id: @question.best_answer_id)
     @comment = Comment.new
+    @comments_amount = Comment.where(question_id: @question.id).where.not(id: @question.best_answer_id).count
   end
 
   def edit
