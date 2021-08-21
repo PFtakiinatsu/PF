@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_29_040638) do
+ActiveRecord::Schema.define(version: 2021_08_20_070535) do
 
   create_table "bookmarks", force: :cascade do |t|
     t.integer "user_id"
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 2021_07_29_040638) do
     t.datetime "updated_at", null: false
     t.integer "best_answer_id"
     t.boolean "is_solved", default: false, null: false
+    t.boolean "question_status", default: false, null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -55,6 +56,10 @@ ActiveRecord::Schema.define(version: 2021_07_29_040638) do
     t.text "introduction"
     t.integer "point", default: 1000
     t.string "profile_image_id"
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string "unconfirmed_email"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
