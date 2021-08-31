@@ -92,26 +92,27 @@
       </div>
     </div>
 
-<div class="row">
-  <div class="col-md-12">
-    <h4>ランキング</h4>
-      <table>
-        <% @users.first(5).each.with_index(1) do |user, i| %>
-        <tr>
-          <% if i == 1 %>
-          <td><%= image_tag 'first.png',:width => '40' %> <%= attachment_image_tag user, :profile_image, size:"80x80", fallback: "no_image.jpg", class: 'rounded-circle'  %> <%= link_to user.name, user_path(user.id) %></td>
-          <% elsif i == 2 %>
-          <td><%= image_tag 'second.png',:width => '40' %> <%= attachment_image_tag user, :profile_image, size:"80x80", fallback: "no_image.jpg", class: 'rounded-circle'  %> <%= link_to user.name, user_path(user.id) %></td>
-          <% elsif i == 3 %>
-          <td><%= image_tag 'third.png',:width => '40' %> <%= attachment_image_tag user, :profile_image, size:"80x80", fallback: "no_image.jpg", class: 'rounded-circle'  %> <%= link_to user.name, user_path(user.id) %></td>
-          <% else %>
-          <td>第<%= i %>位 <%= attachment_image_tag user, :profile_image, size:"80x80", fallback: "no_image.jpg", class: 'rounded-circle'  %> <%= link_to user.name, user_path(user.id) %></td>
+  <div class="row">
+    <div class="col-md-12">
+      <h4>ランキング</h4>
+        <table>
+          <% @users.first(5).each.with_index(1) do |user, i| %>
+          <tr>
+            <% if i == 1 %>
+            <td><%= image_tag 'first.png',:width => '40' %> <%= attachment_image_tag user, :profile_image, size:"80x80", fallback: "no_image.jpg", class: 'rounded-circle'  %> <%= link_to user.name, user_path(user.id) %></td>
+            <% elsif i == 2 %>
+            <td><%= image_tag 'second.png',:width => '40' %> <%= attachment_image_tag user, :profile_image, size:"80x80", fallback: "no_image.jpg", class: 'rounded-circle'  %> <%= link_to user.name, user_path(user.id) %></td>
+            <% elsif i == 3 %>
+            <td><%= image_tag 'third.png',:width => '40' %> <%= attachment_image_tag user, :profile_image, size:"80x80", fallback: "no_image.jpg", class: 'rounded-circle'  %> <%= link_to user.name, user_path(user.id) %></td>
+            <% else %>
+            <td>第<%= i %>位 <%= attachment_image_tag user, :profile_image, size:"80x80", fallback: "no_image.jpg", class: 'rounded-circle'  %> <%= link_to user.name, user_path(user.id) %></td>
+            <% end %>
+            <td><%= user.word %></td>
+            <td><%= user.point %>ポイント</td>
+          </tr>
           <% end %>
-          <td><%= user.word %></td>
-          <td><%= user.point %>ポイント</td>
-        </tr>
-        <% end %>
-      </table>
+        </table>
+    </div>
+  
   </div>
-
-</div>
+</main>
