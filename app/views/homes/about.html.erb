@@ -5,7 +5,13 @@
         <div>
         <h3>TeachMeへようこそ</h3>
         </div>
-        <div onclick="obj=document.getElementById('open').style; obj.display=(obj.display=='none')?'block':'none';">
+        <div onclick="open_close('open')" style="display:none;clear:both;" id="open">
+          <script>
+            function open_close(open){
+            obj=document.getElementById(open).style;
+            obj.display=(obj.display=='none')? 'block':'none';
+            }
+          </script>
         <a style="cursor:pointer;">▼ TeachMeとは?</a>
         </div>
         <div id="open" style="display:none;clear:both;">
