@@ -39,9 +39,9 @@ class UsersController < ApplicationController
     user_id = params[:user_id]
     @user = User.find(user_id)
     case params[:order_sort]
-    when '0'
+    when 'questions'
       @questions = Question.where(user_id: @user.id).page(params[:page]).per(10)
-    when '1'
+    when 'answers'
       comments = Comment.where(user_id: @user.id).pluck(:question_id)
       @questions = Question.find(comments)
       @questions = Kaminari.paginate_array(@questions).page(params[:page])

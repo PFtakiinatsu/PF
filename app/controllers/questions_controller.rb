@@ -27,9 +27,9 @@ class QuestionsController < ApplicationController
     # gem "kaminari"を使用　ペジネーションをつけたいデータに.page(params[:page])を追加
     # perで表示件数を変える（デフォルトは25件）
     @questions = case params[:order_sort]
-                 when '0'
+                 when 'all'
                    Question.all.page(params[:page]).per(10)
-                 when '1'
+                 when 'unsolved'
                    Question.where(is_solved: false).page(params[:page]).per(10)
                  else
                    Question.where(is_solved: true).page(params[:page]).per(10)

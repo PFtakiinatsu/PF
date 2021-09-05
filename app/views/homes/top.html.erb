@@ -33,7 +33,7 @@
                 <% end %>
               </table>
               <div class="text-right">
-                <%= link_to "もっと見る", questions_path(order_sort: 0) %>
+                <%= link_to "もっと見る", questions_path(order_sort: "all") %>
               </div>
           </div>
 
@@ -59,7 +59,7 @@
                 <% end %>
               </table>
               <div class="text-right">
-                <%= link_to "もっと見る", questions_path(order_sort: 1) %>
+                <%= link_to "もっと見る", questions_path(order_sort: "unsolved") %>
               </div>
           </div>
 
@@ -85,7 +85,7 @@
                 <% end %>
               </table>
               <div class="text-right">
-                <%= link_to "もっと見る", questions_path(order_sort: 2) %>
+                <%= link_to "もっと見る", questions_path(order_sort: "solved") %>
               </div>
           </div>
         </div>
@@ -113,6 +113,6 @@
           <% end %>
         </table>
     </div>
-  
+
   </div>
 </main>

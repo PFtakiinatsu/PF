@@ -78,7 +78,7 @@
               </table>
             <div class="text-right">
               <% if @questions_amount.to_i >= 11 %>
-                <%= link_to "もっと見る", users_path(user_id: params[:id], order_sort: 0) %>
+                <%= link_to "もっと見る", users_path(user_id: params[:id], order_sort: "questions") %>
               <% end %>
             </div>
           </div>
@@ -104,7 +104,7 @@
               </table>
             <div class="text-right">
               <% if @answered_questions_amount.to_i >= 11 %>
-                <%= link_to "もっと見る", users_path(user_id: params[:id], order_sort: 1) %>
+                <%= link_to "もっと見る", users_path(user_id: params[:id], order_sort: "answers") %>
               <% end %>
             </div>
           </div>
@@ -130,7 +130,7 @@
               </table>
             <div class="text-right">
                 <% if @bookmark_lists_amount.to_i >= 11 %>
-                <%= link_to "もっと見る", users_path(user_id: params[:id], order_sort: 2) %>
+                <%= link_to "もっと見る", users_path(user_id: params[:id], order_sort: "bookmarks") %>
               <% end %>
             </div>
           </div>
