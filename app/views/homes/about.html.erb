@@ -5,6 +5,49 @@
         <div>
         <h3>TeachMeへようこそ</h3>
         </div>
+        <div class="introduction">
+          <ul class="introduction-list">
+            <li class="introduction-list-item">
+              <h3 class="introduction-title">Teach Meとは?</h3>
+              <span>+</span>
+              <div class="introduction-content">
+                <p>TeachMeは、勉強中わからないことを質問したり、誰かの質問に答えたりして理解を深めるための質問サイトです。</p>
+                <p>会員登録をしなくても、他の人の質問を見ることができます。</p>
+                <p>質問の投稿、回答、保存をするには、<%= link_to "会員登録", new_user_registration_path %>が必要です。</p>
+              </div>
+            </li>
+            <li class="introduction-list-item">
+              <h3 class="introduction-title">質問のコツ</h3>
+              <span>+</span>
+              <div class="introduction-content">
+                <p>質問はなるべく具体的に書きましょう。</p>
+                <p>科目、タイトル、内容、理解度ステータスは必ず記入してください。</p>
+                <p>自分がどのように考えたのか、どこがわからないのかを言語化することで、効果的な学習につながります。</p>
+                <p>集まった回答から、特にわかりやすいと思った回答をベストアンサーに選んでください。</p>
+              </div>
+            </li>
+            <li class="introduction-list-item">
+              <h3 class="introduction-title">ポイントについて</h3>
+              <span>+</span>
+                <div class="introduction-content">
+                  <p>会員登録すると1000ポイントが付与されます。</p>
+                  <p>質問する時には、自分の持っているポイントをつかってサンクスポイントをつけることができます。</p>
+                  <p>サンクスポイントは設定しなくても質問することができますが、設定することで質問に答えてもらいやすくなります。</p>
+                  <p>質問に回答してベストアンサーに選ばれると、質問のサンクスポイントが付与されます。</p>
+                  <p>多くのポイントを獲得すると、ランキングに入ることができます！</p>
+                  <p>上位を目指してがんばりましょう。</p>
+              </div>
+            </li>
+            <li class="introduction-list-item">
+              <h3 class="introduction-title">プロフィール設定</h3>
+              <span>+</span>
+                <div class="introduction-content">
+                  <p>マイページから、自分のプロフィールを設定することができます。</p>
+                  <p>プロフィール画像を設定したり、自己紹介文やひとことを記入し、同じ目標を持つ仲間を見つけましょう。</p>
+              </div>
+            </li>
+          </ul>
+        </div>
         <div onclick="open_close('open')" style="display:none;clear:both;" id="open">
           <script>
             function open_close(open){

@@ -16,3 +16,23 @@ table tr{
 table tr:hover{
   background-color: #d4f0fd;
 }
+
+.introduction-list-item {
+  border-bottom: 1px solid #ccc;
+  position: relative;
+  margin: 20px;
+}
+
+.introduction-list-item h3 {
+  font-size: 20px;
+}
+
+.introduction-list-item span {
+  position: absolute;
+  top: 0;
+  right: 5px;
+}
+
+.introduction-content {
+  display: none;
+}

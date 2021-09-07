@@ -1,0 +1,14 @@
+ $(function) {
+  $('introduction-list-item').click(funtion() {
+    var $content = $(this).find('.introduction-content');
+    if ($content.hasClass("open")) {
+      $content.removeClass("open");
+      $content.slideUp();
+      $(this).find('span').text('+');
+    } else {
+      $content.addClass("open");
+      $content.slideDown();
+      $(this).find('span').text('-');
+    }
+  });
+});
