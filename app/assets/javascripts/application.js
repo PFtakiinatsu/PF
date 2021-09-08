@@ -36,5 +36,18 @@
             // ↓クリックしたタブと同じ順番のコンテンツを表示↓
             $('.tabbox').eq(index).addClass('box-show');
         });
+
+        $('.introduction-list-item').click(function(){
+            var $content = $(this).find('.introduction-content');
+            if ($content.hasClass("open")) {
+              $content.removeClass("open");
+              $content.slideUp();
+              $(this).find('span').text('+');
+            } else {
+              $content.addClass("open");
+              $content.slideDown();
+              $(this).find('span').text('-');
+            }
+        });
     });
 });

@@ -48,50 +48,6 @@
             </li>
           </ul>
         </div>
-        <div onclick="open_close('open')" style="display:none;clear:both;" id="open">
-          <script>
-            function open_close(open){
-            obj=document.getElementById(open).style;
-            obj.display=(obj.display=='none')? 'block':'none';
-            }
-          </script>
-        <a style="cursor:pointer;">▼ TeachMeとは?</a>
-        </div>
-        <div id="open" style="display:none;clear:both;">
-        <p>TeachMeは、勉強中わからないことを質問したり、誰かの質問に答えたりして理解を深めるための質問サイトです。</p>
-        <p>会員登録をしなくても、他の人の質問を見ることができます。</p>
-        <p>質問の投稿、回答、保存をするには、<%= link_to "会員登録", new_user_registration_path %>が必要です。</p>
-        </div>
-
-        <div onclick="obj=document.getElementById('open2').style; obj.display=(obj.display=='none')?'block':'none';">
-        <a style="cursor:pointer;">▼ 質問のコツ</a>
-        </div>
-        <div id="open2" style="display:none;clear:both;">
-        <p>質問はなるべく具体的に書きましょう。</p>
-        <p>科目、タイトル、内容、理解度ステータスは必ず記入してください。</p>
-        <p>自分がどのように考えたのか、どこがわからないのかを言語化することで、効果的な学習につながります。</p>
-        <p>集まった回答から、特にわかりやすいと思った回答をベストアンサーに選んでください。</p>
-        </div>
-
-        <div onclick="obj=document.getElementById('open3').style; obj.display=(obj.display=='none')?'block':'none';">
-        <a style="cursor:pointer;">▼ ポイントについて</a>
-        </div>
-        <div id="open3" style="display:none;clear:both;">
-        <p>会員登録すると1000ポイントが付与されます。</p>
-        <p>質問する時には、自分の持っているポイントをつかってサンクスポイントをつけることができます。</p>
-        <p>サンクスポイントは設定しなくても質問することができますが、設定することで質問に答えてもらいやすくなります。</p>
-        <p>質問に回答してベストアンサーに選ばれると、質問のサンクスポイントが付与されます。</p>
-        <p>多くのポイントを獲得すると、ランキングに入ることができます！</p>
-        <p>上位を目指してがんばりましょう。</p>
-        </div>
-
-        <div onclick="obj=document.getElementById('open4').style; obj.display=(obj.display=='none')?'block':'none';">
-        <a style="cursor:pointer;">▼ プロフィール設定</a>
-        </div>
-        <div id="open4" style="display:none;clear:both;">
-        <p>マイページから、自分のプロフィールを設定することができます。</p>
-        <p>プロフィール画像を設定したり、自己紹介文やひとことを記入し、同じ目標を持つ仲間を見つけましょう。</p>
-        </div>
       </div>
     </div>
   </div>
