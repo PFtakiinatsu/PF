@@ -1,4 +1,3 @@
-
 <main>
   <div class="container px-5 px-sm-0">
     <div class="row">
@@ -10,7 +9,6 @@
           <li class="tab">解決済</li>
         </ul>
         <div class="tabbox-contents">
-
           <div class="tabbox box-show">
               <table class="table">
                 <tr>
@@ -64,55 +62,56 @@
           </div>
 
           <div class="tabbox">
-              <table class="table">
-                <tr>
-                  <th>科目</th>
-                  <th>タイトル</th>
-                  <th>理解度</th>
-                  <th>コメント数</th>
-                  <th>ステータス</th>
-                  <th>ポイント</th>
-                </tr>
-                <% @solved_questions.first(5).each do |question| %>
-                <tr>
-                  <td><%= question.subject %></td>
-                  <td><%= link_to question.title.truncate(13), question_path(question.id) %></td>
-                  <td><%= question.status %></td>
-                  <td><%= question.comments.count %></td>
-                  <td><%= question.is_solved ? "解決済":"未解決" %></td>
-                  <td><%= question.point %></td>
-                </tr>
-                <% end %>
-              </table>
+            <table class="table">
+              <tr>
+                <th>科目</th>
+                <th>タイトル</th>
+                <th>理解度</th>
+                <th>コメント数</th>
+                <th>ステータス</th>
+                <th>ポイント</th>
+              </tr>
+              <% @solved_questions.first(5).each do |question| %>
+              <tr>
+                <td><%= question.subject %></td>
+                <td><%= link_to question.title.truncate(13), question_path(question.id) %></td>
+                <td><%= question.status %></td>
+                <td><%= question.comments.count %></td>
+                <td><%= question.is_solved ? "解決済":"未解決" %></td>
+                <td><%= question.point %></td>
+              </tr>
+              <% end %>
+            </table>
               <div class="text-right">
                 <%= link_to "もっと見る", questions_path(order_sort: "solved") %>
               </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-  <div class="row">
-    <div class="col-md-12">
-      <h4>ランキング</h4>
-        <table>
-          <% @users.first(5).each.with_index(1) do |user, i| %>
-          <tr>
-            <% if i == 1 %>
-            <td><%= image_tag 'first.png',:width => '40' %> <%= attachment_image_tag user, :profile_image, size:"80x80", fallback: "no_image.jpg", class: 'rounded-circle'  %> <%= link_to user.name, user_path(user.id) %></td>
-            <% elsif i == 2 %>
-            <td><%= image_tag 'second.png',:width => '40' %> <%= attachment_image_tag user, :profile_image, size:"80x80", fallback: "no_image.jpg", class: 'rounded-circle'  %> <%= link_to user.name, user_path(user.id) %></td>
-            <% elsif i == 3 %>
-            <td><%= image_tag 'third.png',:width => '40' %> <%= attachment_image_tag user, :profile_image, size:"80x80", fallback: "no_image.jpg", class: 'rounded-circle'  %> <%= link_to user.name, user_path(user.id) %></td>
-            <% else %>
-            <td>第<%= i %>位 <%= attachment_image_tag user, :profile_image, size:"80x80", fallback: "no_image.jpg", class: 'rounded-circle'  %> <%= link_to user.name, user_path(user.id) %></td>
+    <div class="row">
+      <div class="col-md-12">
+        <h4>ランキング</h4>
+          <table>
+            <% @users.first(5).each.with_index(1) do |user, i| %>
+            <tr>
+              <% if i == 1 %>
+              <td><%= image_tag 'first.png',:width => '40' %> <%= attachment_image_tag user, :profile_image, size:"80x80", fallback: "no_image.jpg", class: 'rounded-circle'  %> <%= link_to user.name, user_path(user.id) %></td>
+              <% elsif i == 2 %>
+              <td><%= image_tag 'second.png',:width => '40' %> <%= attachment_image_tag user, :profile_image, size:"80x80", fallback: "no_image.jpg", class: 'rounded-circle'  %> <%= link_to user.name, user_path(user.id) %></td>
+              <% elsif i == 3 %>
+              <td><%= image_tag 'third.png',:width => '40' %> <%= attachment_image_tag user, :profile_image, size:"80x80", fallback: "no_image.jpg", class: 'rounded-circle'  %> <%= link_to user.name, user_path(user.id) %></td>
+              <% else %>
+              <td>第<%= i %>位 <%= attachment_image_tag user, :profile_image, size:"80x80", fallback: "no_image.jpg", class: 'rounded-circle'  %> <%= link_to user.name, user_path(user.id) %></td>
+              <% end %>
+              <td><%= user.word %></td>
+              <td><%= user.point %>ポイント</td>
+            </tr>
             <% end %>
-            <td><%= user.word %></td>
-            <td><%= user.point %>ポイント</td>
-          </tr>
-          <% end %>
-        </table>
+          </table>
+      </div>
     </div>
-
+    
   </div>
 </main>
