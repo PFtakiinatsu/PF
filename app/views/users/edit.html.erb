@@ -24,9 +24,7 @@
         </div>
           <%= f.attachment_field :profile_image, fallback: "no_image.jpg" %>
       </div>
-
       <div class="mx-auto col-md-7 offset-md-1">
-
           <div class="form-group">
             <%= f.label :name, 'ユーザーネーム' %>
             <%= f.text_field :name, class: 'form-control' %>
@@ -44,11 +42,8 @@
           </div>
 
           <div class="al-c"><%= f.submit 'プロフィール編集を完了する', class: 'btn btn-primary' %></div>
-
       </div>
-
     </div>
   </div>
   <% end %>
-  
 </main>
